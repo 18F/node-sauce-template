@@ -1,14 +1,15 @@
+// TODO: encapsulate the sauce configuration
 var username = process.env.SAUCE_USERNAME;
 var accessKey = process.env.SAUCE_ACCESS_KEY;
 var URL_TO_TEST = process.env.URL_TO_TEST || process.env.LOCAL_TUNNEL_URL;
 
 if (!username || !accessKey) {
-  console.error('You must provide SAUCE_USERNAME and SAUCE_ACCESS_KEY in env');
+  console.error('You must provide SAUCE_USERNAME and SAUCE_ACCESS_KEY in your environment');
   process.exit(1);
 }
 
 if (!URL_TO_TEST) {
-  console.error('You must provide a URL_TO_TEST');
+  console.error('You must provide a URL_TO_TEST in your environment');
   process.exit(1);
 }
 
@@ -21,6 +22,13 @@ wd.configureHttp({
   retries: 1
 });
 
+/*
+ * TODO: encapsulate from here to `var browser` into a single function
+ * that can allow you to run tests against a local browser as well.
+ *
+ * Maybe use wd-min instead:
+ * <https://www.npmjs.com/package/min-wd>
+ */
 var capabilities = {
   browserName: 'chrome',
   name: 'test name here',
