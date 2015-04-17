@@ -1,7 +1,7 @@
 {
-  "name": "selenium-test",
-  "version": "1.0.0",
-  "description": "",
+  "name": "sauce-template",
+  "version": "0.0.1",
+  "description": "A Node.js template for cross-browser testing with Sauce Labs",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
