@@ -1,0 +1,12 @@
+[
+  {
+    "browserName": "internet explorer",
+    "version": "9.0"
+  },
+  {
+    "browserName": "chrome"
+  },
+  {
+    "browserName": "firefox"
+  }
+]
