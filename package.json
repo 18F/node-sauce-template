@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha",
-    "test-multi": "multitest.js"
+    "test-multi": "node multitest.js"
   },
   "author": [
     "Shawn Allen",
@@ -14,7 +14,8 @@
   ],
   "license": "CC0",
   "dependencies": {
-    "express": "^4.12.3"
+    "express": "^4.12.3",
+    "require-env": "0.0.4"
   },
   "devDependencies": {
     "async": "^0.9.0",
