@@ -125,7 +125,7 @@ are run.) For instance, if you want to run your tests against Internet Explorer
 BROWSER='{"browserName":"internet explorer","version":"9.0"}' npm test
 ```
 
-## <a name="multi-browser-tests"></a> Multi-Browser Tests
+## Multi-Browser Tests
 By default, the Selenium test suite is only run against Chrome on Sauce Labs'
 default platform (Linux as of this writing). The included `multitest.js`
 allows you to run the tests against all of the browser configurations specified
