@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "sauce-connect": "sc-run",
-    "test": "mocha",
-    "test-multi": "node multitest.js"
+    "test": "sc-run -- mocha",
+    "test-multi": "sc-run -- node multitest.js"
   },
   "author": [
     "Shawn Allen",
