@@ -90,9 +90,6 @@ try decoupling it from the tests by running three shells in parallel:
 * `npm run sauce-connect` to create the Sauce Connect tunnel
 * `npm test` to run the test
 
-## Next Steps
-Having to run three separate shells just to 
-
 [Selenium]: http://docs.seleniumhq.org/
 [Sauce Labs]: https://saucelabs.com
 [Sauce Connect]: https://docs.saucelabs.com/reference/sauce-connect/
