@@ -31,8 +31,8 @@ wd.configureHttp({
  */
 var capabilities = {
   browserName: 'chrome',
-  name: 'test name here',
-  tags: []
+  name: process.env.SAUCE_TEST_NAME,
+  tags: (process.env.SAUCE_TEST_TAGS || '').split(' ')
 };
 
 if (process.env.BROWSER) {
