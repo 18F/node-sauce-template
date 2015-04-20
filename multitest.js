@@ -3,8 +3,8 @@ var yargs = require('yargs')
   .usage('$0 [options] -- [test command]')
   .describe('browsers', 'load the browser list from this JSON file')
   .default('browsers', 'browsers.json')
-  .describe('series', 'run the tests in series rather than in parallel')
-  .alias('series', 's')
+  .describe('serial', 'run the tests in series rather than in parallel')
+  .alias('serial', 's')
   .alias('browsers', 'b')
   .alias('h', 'help')
   .wrap(80);
@@ -58,7 +58,7 @@ var jobs = browsers.map(function(browser) {
   return job;
 });
 
-async[options.series ? 'series' : 'parallel'](jobs, function(error) {
+async[options.serial ? 'series' : 'parallel'](jobs, function(error) {
   if (error) {
     // console.error('Error:', error);
     jobs.forEach(function(job) {
