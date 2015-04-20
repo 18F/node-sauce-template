@@ -1,5 +1,4 @@
 var express = require('express');
-
 var app = express();
 
 app.get('/', function(req, res) {
@@ -7,7 +6,8 @@ app.get('/', function(req, res) {
 });
 
 var server = app.listen(9000, function() {
-  var host = server.address().address;
-  var port = server.address().port;
+  var addr = server.address();
+  var host = addr.address;
+  var port = addr.port;
   console.log('server running at http://%s:%s', host, port);
 });
