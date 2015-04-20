@@ -113,7 +113,19 @@ decoupling it from the tests by running three shells in parallel:
   Connect tunnel
 * `npm test` to run the test
 
-### <a name="multi-browser-tests"></a> Multi-Browser Tests
+
+## One-Off Browser Tests
+As you can see [in test/selenium.js](test/selenium.js#L30-32), you can use the
+`BROWSER` environment variable to override the default remote browser
+configuration.  (This is how the [multi-browser tests](#multi-browser-tests)
+are run.) For instance, if you want to run your tests against Internet Explorer
+9 on Windows, you could run:
+
+```
+BROWSER='{"browserName":"internet explorer","version":"9.0"}' npm test
+```
+
+## <a name="multi-browser-tests"></a> Multi-Browser Tests
 By default, the Selenium test suite is only run against Chrome on Sauce Labs'
 default platform (Linux as of this writing). The included `multitest.js`
 allows you to run the tests against all of the browser configurations specified
@@ -121,7 +133,16 @@ in [browsers.json](browsers.json) in parallel, and exits with non-zero status
 if any of the tests fail.
 
 To run the multi-browser tests, just substitute `npm run test-multi` for `npm
-test` in the procedure above.
+test` in the procedure above. You can modify `browsers.json` and specify as
+many browser/platform configurations as your project needs. Just be warned that
+remote Selenium tests take much longer to run than local tests, and that your
+workflow may be impeded by tests that take too long to run. You can use the
+`--serial` flag to run the tests in serial, in which case the first failing
+test will abort the process:
+
+```sh
+node multitest.js --serial
+```
 
 [Selenium]: http://docs.seleniumhq.org/
 [Sauce Labs]: https://saucelabs.com
