@@ -6,6 +6,23 @@ dynamically served with any language.
 **Before you start:** You'll need to create a [Sauce Labs] account if you don't
 have one already.
 
+## Components
+There are a couple of moving parts in this repository that you should
+know about before proceding:
+
+1. The test server in `server.js` is an [Express] app that renders an
+   HTML page with the title, "Hello, world!".
+1. The test suite in `test/selenium.js` is a [Mocha] test script that
+   uses the Selenium [WebDriver] API to test the HTML rendered by our
+   test server in a remote browser.
+1. The [sauceconnect-runner] dependency and `.env.example` template
+   simplify running Selenium tests on *remote* [Sauce Labs] virtual
+   machines against your *local* test server via [Sauce Connect].
+1. The `multitest.js` script reads a list of Selenium-compatible
+   browser configurations from `browsers.json` and runs the test suite against
+   each of them in parallel. See [Multi-Browser Tests](#multi-browser-tests)
+   for more info.
+
 ## Setup
 Clone this repo and install the dependencies via [npm]:
 
@@ -24,6 +41,11 @@ world!"`. You can confirm that it's running by visiting
 ```sh
 curl -s http://localhost:9000
 ```
+
+**Note**: In your project environment, the server (i.e., the
+["start" script in package.json](package.json#L7)) would either start up your
+web application or start a local [HTTP server](https://github.com/indexzero/http-server)
+to serve static files from your project directory.
 
 ### Configure Sauce Labs
 Before you can run the Selenium tests, you'll need to set some environment
@@ -82,13 +104,24 @@ If all goes well, you should see some text like this:
 ![image](https://cloud.githubusercontent.com/assets/113896/7236545/7c7dd32e-e74a-11e4-8e7b-e81f6bb26afc.png)
 
 If you look at [package.json](package.json#L8), you can see that this is using
-[sauceconnect-runner] to create the [Sauce Connect] tunnel first, then running
-the [Mocha] tests with [wd]. If you're having trouble with `sc-run`, you can
-try decoupling it from the tests by running three shells in parallel:
+[sauceconnect-runner]'s `sc-run` utility to create the [Sauce Connect] tunnel
+"round" the Mocha tests. If you're having trouble with `sc-run`, you can try
+decoupling it from the tests by running three shells in parallel:
 
 * `npm start` to start the server
-* `npm run sauce-connect` to create the Sauce Connect tunnel
+* `npm run sauce-connect` (or `./node_modules/.bin/sc-run`) to create the Sauce
+  Connect tunnel
 * `npm test` to run the test
+
+### <a name="multi-browser-tests"></a> Multi-Browser Tests
+By default, the Selenium test suite is only run against Chrome on Sauce Labs'
+default platform (Linux as of this writing). The included `multitest.js`
+allows you to run the tests against all of the browser configurations specified
+in [browsers.json](browsers.json) in parallel, and exits with non-zero status
+if any of the tests fail.
+
+To run the multi-browser tests, just substitute `npm run test-multi` for `npm
+test` in the procedure above.
 
 [Selenium]: http://docs.seleniumhq.org/
 [Sauce Labs]: https://saucelabs.com
@@ -100,3 +133,4 @@ try decoupling it from the tests by running three shells in parallel:
 [sauceconnect-runner]: https://github.com/shawnbot/sauceconnect-runner
 [Mocha]: http://mochajs.org/
 [wd]: https://github.com/admc/wd
+[WebDriver]: https://code.google.com/p/selenium/wiki/GettingStarted
