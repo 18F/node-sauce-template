@@ -105,7 +105,7 @@ If all goes well, you should see some text like this:
 
 If you look at [package.json](package.json#L8), you can see that this is using
 [sauceconnect-runner]'s `sc-run` utility to create the [Sauce Connect] tunnel
-"round" the Mocha tests. If you're having trouble with `sc-run`, you can try
+"around" the Mocha tests. If you're having trouble with `sc-run`, you can try
 decoupling it from the tests by running three shells in parallel:
 
 * `npm start` to start the server
