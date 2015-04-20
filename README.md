@@ -132,13 +132,13 @@ allows you to run the tests against all of the browser configurations specified
 in [browsers.json](browsers.json) in parallel, and exits with non-zero status
 if any of the tests fail.
 
-To run the multi-browser tests, just substitute `npm run test-multi` for `npm
-test` in the procedure above. You can modify `browsers.json` and specify as
-many browser/platform configurations as your project needs. Just be warned that
-remote Selenium tests take much longer to run than local tests, and that your
-workflow may be impeded by tests that take too long to run. You can use the
-`--serial` flag to run the tests in serial, in which case the first failing
-test will abort the process:
+To run the multi-browser tests, just substitute `node multitest.js` (or `npm
+run test-multi`) for `npm test` (i.e. `mocha`) in the procedure above. You can
+modify `browsers.json` and specify as many browser/platform configurations as
+your project needs. Just be warned that remote Selenium tests take much longer
+to run than local tests, and that your workflow may be impeded by tests that
+take too long to run. You can use the `--serial` flag to run the tests in
+serial, in which case the first failing test will abort the process:
 
 ```sh
 node multitest.js --serial
