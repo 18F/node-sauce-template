@@ -1,17 +1,9 @@
-// TODO: encapsulate the sauce configuration
-var username = process.env.SAUCE_USERNAME;
-var accessKey = process.env.SAUCE_ACCESS_KEY;
-var URL_TO_TEST = process.env.URL_TO_TEST || process.env.LOCAL_TUNNEL_URL;
+var env = require('require-env');
+env.inherit('.env');
 
-if (!username || !accessKey) {
-  console.error('You must provide SAUCE_USERNAME and SAUCE_ACCESS_KEY in your environment');
-  process.exit(1);
-}
-
-if (!URL_TO_TEST) {
-  console.error('You must provide a URL_TO_TEST in your environment');
-  process.exit(1);
-}
+var username = env.require('SAUCE_USERNAME');
+var accessKey = env.require('SAUCE_ACCESS_KEY');
+var url = env.require('SAUCE_TEST_URL');
 
 var wd = require('wd');
 
@@ -39,7 +31,7 @@ if (process.env.BROWSER) {
   capabilities = JSON.parse(process.env.BROWSER);
 }
 
-console.warn('testing "%s" against browser: %s', URL_TO_TEST, JSON.stringify(capabilities));
+console.warn('testing "%s" against browser: %s', url, JSON.stringify(capabilities));
 
 var browser = wd.remote("ondemand.saucelabs.com", 80, username, accessKey);
 var assert = require('assert');
@@ -64,7 +56,7 @@ describe('spec', function() {
   });
 
   it('title == "Hello, world!"', function(done) {
-    browser.get(URL_TO_TEST, function(error) {
+    browser.get(url, function(error) {
       assert.ok(!error);
       browser.title(function(error, title) {
         assert.equal(title, 'Hello, world!');
