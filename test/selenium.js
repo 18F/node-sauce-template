@@ -36,7 +36,7 @@ console.warn('testing "%s" against browser: %s', url, JSON.stringify(capabilitie
 var browser = wd.remote("ondemand.saucelabs.com", 80, username, accessKey);
 var assert = require('assert');
 
-describe('spec', function() {
+describe('selenium', function() {
   this.timeout(timeout);
 
   var allPassed = true;
