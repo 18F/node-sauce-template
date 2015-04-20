@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "sauce-connect": "sc-run",
     "test": "mocha",
     "test-multi": "node multitest.js"
   },
